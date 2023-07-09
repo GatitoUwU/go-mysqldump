@@ -433,32 +433,38 @@ func (table *table) RowBuffer() *bytes.Buffer {
 		switch s := value.(type) {
 		case nil:
 			b.WriteString(nullType)
+			break
 		case *sql.NullString:
 			if s.Valid {
 				fmt.Fprintf(&b, "'%s'", sanitize(s.String))
 			} else {
 				b.WriteString(nullType)
 			}
+			break
 		case *sql.NullInt64:
 			if s.Valid {
 				fmt.Fprintf(&b, "%d", s.Int64)
 			} else {
 				b.WriteString(nullType)
 			}
+			break
 		case *sql.NullFloat64:
 			if s.Valid {
 				fmt.Fprintf(&b, "%f", s.Float64)
 			} else {
 				b.WriteString(nullType)
 			}
+			break
 		case *sql.RawBytes:
 			if len(*s) == 0 {
 				b.WriteString(nullType)
 			} else {
 				fmt.Fprintf(&b, "_binary '%s'", sanitize(string(*s)))
 			}
+			break
 		default:
 			fmt.Fprintf(&b, "'%s'", value)
+			break
 		}
 	}
 	b.WriteString(")")
