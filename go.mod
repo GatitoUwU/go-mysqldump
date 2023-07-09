@@ -1,4 +1,4 @@
-module github.com/sparkedhost/go-mysqldump
+module github.com/GatitoUwU/go-mysqldump
 
 require (
 	github.com/DATA-DOG/go-sqlmock v1.5.0

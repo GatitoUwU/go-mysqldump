@@ -13,7 +13,7 @@ import (
 	"os"
 
 	"github.com/go-sql-driver/mysql"
-	"github.com/sparkedhost/go-mysqldump"
+	"github.com/GatitoUwU/go-mysqldump"
 )
 
 func main() {
@@ -63,4 +63,4 @@ func main() {
 }
 ```
 
-[![GoDoc](https://godoc.org/github.com/sparkedhost/go-mysqldump?status.svg)](https://godoc.org/github.com/sparkedhost/go-mysqldump)
+[![GoDoc](https://godoc.org/github.com/GatitoUwU/go-mysqldump?status.svg)](https://godoc.org/github.com/GatitoUwU/go-mysqldump)

@@ -2,13 +2,13 @@ package mysqldump_test
 
 import (
 	"bytes"
+	"github.com/GatitoUwU/go-mysqldump"
 	"io/ioutil"
 	"reflect"
 	"strings"
 	"testing"
 
 	sqlmock "github.com/DATA-DOG/go-sqlmock"
-	"github.com/sparkedhost/go-mysqldump"
 	"github.com/stretchr/testify/assert"
 )
 
