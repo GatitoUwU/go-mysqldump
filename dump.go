@@ -426,45 +426,25 @@ func (table *table) RowBuffer() *bytes.Buffer {
 	var b bytes.Buffer
 	b.WriteString("(")
 
+	tableValuesLen := len(table.values)
 	for key, value := range table.values {
 		if key != 0 {
 			b.WriteString(",")
 		}
-		switch s := value.(type) {
+		switch value.(type) {
+		case int, int8, int16, int32, int64, uint, uint8, uint16, uint32, uint64, float32, float64:
+			b.WriteString(fmt.Sprintf("%v", value))
+		case string:
+			b.WriteString(fmt.Sprintf("'%v'", value))
+		case []byte:
+			b.WriteString(fmt.Sprintf("'%s'", value))
 		case nil:
-			b.WriteString(nullType)
-			break
-		case *sql.NullString:
-			if s.Valid {
-				fmt.Fprintf(&b, "'%s'", sanitize(s.String))
-			} else {
-				b.WriteString(nullType)
-			}
-			break
-		case *sql.NullInt64:
-			if s.Valid {
-				fmt.Fprintf(&b, "%d", s.Int64)
-			} else {
-				b.WriteString(nullType)
-			}
-			break
-		case *sql.NullFloat64:
-			if s.Valid {
-				fmt.Fprintf(&b, "%f", s.Float64)
-			} else {
-				b.WriteString(nullType)
-			}
-			break
-		case *sql.RawBytes:
-			if len(*s) == 0 {
-				b.WriteString(nullType)
-			} else {
-				fmt.Fprintf(&b, "_binary '%s'", sanitize(string(*s)))
-			}
-			break
+			b.WriteString("NULL")
 		default:
-			fmt.Fprintf(&b, "'%s'", value)
-			break
+			b.WriteString("NULL")
+		}
+		if tableValuesLen < tableValuesLen-1 {
+			b.WriteString(",")
 		}
 	}
 	b.WriteString(")")
